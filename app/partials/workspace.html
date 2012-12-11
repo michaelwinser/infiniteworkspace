@@ -1,0 +1,24 @@
+<style>
+div.objectitem { border: solid black 1px; position: absolute; width: 100px; height: 50px;  }
+
+div.objectviewport { position: absolute; top: 0; left: 0; width: 800px; height: 600px;  overflow: scroll ; border: solid black 1px; -webkit-overflow-scrolling: touch}
+div.objectcontainer { position: absolute; width: 4000px; height: 4000px; background-color: white; overflow: hidden} 
+
+div.objectmap {position: absolute; left: 800px; top: 0; width: 100px; height: 100px; background-color: #ccccff}
+div.objectmap div.objectitem { width: 2.5px; height: 1.25px; border: none; background: black; overflow: hidden; border: none; color: rgba(0,0,0,0); }
+div.mapposition { border: solid red 1px; position: absolute; height: 20px; width: 15px; top: 0px; left: 0px}
+
+
+div.top { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: yellow"}
+</style>
+<div class="top">hello
+<div id="viewport" class="objectviewport" onscroll="var e = document.all.mapposition; e.style.left = (event.target.scrollLeft / 40) + 'px'; e.style.top = (event.target.scrollTop / 40) + 'px'">
+  <div class="objectcontainer" ng-click="AddObject($event.offsetX, $event.offsetY)">
+    <div class="objectitem" ng-repeat="object in objects" id="item{{object.id}}" style="top: {{object.y}}px; left: {{object.x}}px;">{{object.text}}</div>
+  </div>
+</div>
+<div id="map" class="objectcontainer objectmap" ng-click="AddObject($event.offsetX * 40, $event.offsetY * 40)">
+  <div class="objectitem" ng-repeat="object in objects" id="item{{object.id}}" style="top: {{object.y / 40}}px; left: {{object.x / 40}}px;">{{object.text}}</div>
+  <div id="mapposition" class="mapposition"></div>
+</div>
+</div>
